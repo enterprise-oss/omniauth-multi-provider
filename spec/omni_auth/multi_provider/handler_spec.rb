@@ -101,12 +101,7 @@ describe OmniAuth::MultiProvider::Handler do
         allow(strategy).to receive(:fail!).and_return(failure_result)
       end
 
-      it "throws a warden symbol" do
-        expect { handler.setup(env) }.to throw_symbol(:warden, failure_result)
-      end
-
       it "calls Strategy#fail! with the appropriate arguments" do
-        catch(:warden) { handler.setup(env) }
         expect(strategy).to have_received(:fail!).with(:invalid_identity_provider, exception)
       end
     end
