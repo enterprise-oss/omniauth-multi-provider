@@ -63,8 +63,7 @@ module OmniAuth
         identity_provider_options = identity_provider_options_generator.call(identity_provider_id, env) || {}
         strategy.options.merge!(identity_provider_options)
       rescue => e
-        result = strategy.fail!(:invalid_identity_provider, e)
-        throw :warden, result
+        strategy.fail!(:invalid_identity_provider, e)
       end
 
       def current_path(env)
